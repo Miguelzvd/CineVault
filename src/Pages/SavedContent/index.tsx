@@ -20,8 +20,6 @@ export function SavedContent() {
 
   const [savedMidiaContent] = useState<IMidiaContent[]>(getSavedMidiaContent());
 
-  console.log(localStorage.getItem("midia_contents"));
-
   const total_content = 10;
 
   const watched_content = 6;
