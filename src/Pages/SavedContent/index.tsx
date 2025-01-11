@@ -59,89 +59,112 @@ export function SavedContent() {
 
   return (
     <>
-      <div className="w-[50%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
-      <h2 className="text-xl font-semibold text-center">Your saved content ⭐</h2>
+      <div className="min-w-[50%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
+        <h2 className="text-xl font-semibold text-center">
+          Your saved content ⭐
+        </h2>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-lg">Movies: {countMovies}</p>
-            <Progress value={movieProgress} className="w-[80%]" color="green" />
+        <p className="font-bold text-base lg:text-lg  text-center">
+          Total: {countMovies}
+        </p>
+
+        <hr className="" />
+
+        <div className="flex flex-col gap-8 lg:gap-4">
+          <div className="flex justify-between items-center flex-col lg:flex-row gap-4">
+            <p className="font-bold text-base lg:text-lg  text-center w-40">
+              Movies: {countMovies}
+            </p>
+            <Progress value={movieProgress} className="w-[80%]"  />
           </div>
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-lg">Series: {countSeries}</p>
-            <Progress value={seriesProgress} className="w-[80%]" color="blue" />
+
+          <hr className="" />
+
+          <div className="flex justify-between items-center flex-col lg:flex-row gap-4">
+            <p className="font-bold text-base lg:text-lg  text-center w-40">
+              Series: {countSeries}
+            </p>
+            <Progress value={seriesProgress} className="w-[80%]" />
           </div>
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-lg">Series Episodes: {countEpisodes}</p>
-            <Progress value={episodeProgress} className="w-[80%]" color="purple" />
+
+          <hr className="" />
+
+          <div className="flex justify-between items-center flex-col lg:flex-row gap-4">
+            <p className="font-bold text-base lg:text-lg  text-center w-40">
+              Series Episodes: {countEpisodes}
+            </p>
+            <Progress
+              value={episodeProgress}
+              className="w-[80%]"
+            />
           </div>
         </div>
       </div>
-        
-        <MidiaContentSection
-          pagination={
-            <Pagination className="w-full flex flex-row self-end">
-              <PaginationContent>
+
+      <MidiaContentSection
+        pagination={
+          <Pagination className="w-full flex flex-row self-end">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  className={`${
+                    page === 1 ? "cursor-not-allowed" : "cursor-pointer"
+                  }`}
+                  onClick={() => page > 1 && handlePaginationChange(page - 1)}
+                />
+              </PaginationItem>
+              {page > 1 && (
                 <PaginationItem>
-                  <PaginationPrevious
-                    className={`${
-                      page === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                    }`}
-                    onClick={() => page > 1 && handlePaginationChange(page - 1)}
-                  />
-                </PaginationItem>
-                {page > 1 && (
-                  <PaginationItem>
-                    <PaginationLink
-                      href="#"
-                      onClick={() => handlePaginationChange(1)}
-                    >
-                      1
-                    </PaginationLink>
-                  </PaginationItem>
-                )}
-                {page > 2 && <PaginationEllipsis />}
-                <PaginationItem>
-                  <PaginationLink href="#" isActive>
-                    {page}
+                  <PaginationLink
+                    href="#"
+                    onClick={() => handlePaginationChange(1)}
+                  >
+                    1
                   </PaginationLink>
                 </PaginationItem>
-                {page < totalPages - 1 && <PaginationEllipsis />}
-                {page < totalPages && (
-                  <PaginationItem>
-                    <PaginationLink
-                      href="#"
-                      onClick={() => handlePaginationChange(totalPages)}
-                    >
-                      {totalPages}
-                    </PaginationLink>
-                  </PaginationItem>
-                )}
+              )}
+              {page > 2 && <PaginationEllipsis />}
+              <PaginationItem>
+                <PaginationLink href="#" isActive>
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+              {page < totalPages - 1 && <PaginationEllipsis />}
+              {page < totalPages && (
                 <PaginationItem>
-                  <PaginationNext
-                    className={`${
-                      page >= totalPages ? "cursor-not-allowed" : "cursor-pointer"
-                    }`}
-                    onClick={() =>
-                      page < totalPages && handlePaginationChange(page + 1)
-                    }
-                  />
+                  <PaginationLink
+                    href="#"
+                    onClick={() => handlePaginationChange(totalPages)}
+                  >
+                    {totalPages}
+                  </PaginationLink>
                 </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          }
-        >
-          {currentItems.map((content) => (
-            <ContentCard
-              key={content.imdbID}
-              id={content.imdbID}
-              image={content.Poster}
-              title={content.Title}
-              type={content.Type}
-              year={content.Year}
-            />
-          ))}
-        </MidiaContentSection>
+              )}
+              <PaginationItem>
+                <PaginationNext
+                  className={`${
+                    page >= totalPages ? "cursor-not-allowed" : "cursor-pointer"
+                  }`}
+                  onClick={() =>
+                    page < totalPages && handlePaginationChange(page + 1)
+                  }
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        }
+      >
+        {currentItems.map((content) => (
+          <ContentCard
+            key={content.imdbID}
+            id={content.imdbID}
+            image={content.Poster}
+            title={content.Title}
+            type={content.Type}
+            year={content.Year}
+          />
+        ))}
+      </MidiaContentSection>
     </>
   );
 }

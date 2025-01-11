@@ -74,23 +74,38 @@ export function WatchedContent() {
           Your watched content 📺
         </h2>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-lg">Movies: {countMovies}</p>
-            <Progress value={movieProgress} className="w-[80%]" color="green" />
+        <p className="font-bold text-base lg:text-lg  text-center">
+          Total: {countMovies}
+        </p>
+
+        <hr className="" />
+
+        <div className="flex flex-col gap-8 lg:gap-4">
+          <div className="flex justify-between items-center flex-col lg:flex-row gap-4">
+            <p className="font-bold text-base lg:text-lg  text-center w-40">
+              Movies: {countMovies}
+            </p>
+            <Progress value={movieProgress} className="w-[80%]"  />
           </div>
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-lg">Series: {countSeries}</p>
-            <Progress value={seriesProgress} className="w-[80%]" color="blue" />
+
+          <hr className="" />
+
+          <div className="flex justify-between items-center flex-col lg:flex-row gap-4">
+            <p className="font-bold text-base lg:text-lg  text-center w-40">
+              Series: {countSeries}
+            </p>
+            <Progress value={seriesProgress} className="w-[80%]" />
           </div>
-          <div className="flex justify-between items-center">
-            <p className="font-bold text-lg">
+
+          <hr className="" />
+
+          <div className="flex justify-between items-center flex-col lg:flex-row gap-4">
+            <p className="font-bold text-base lg:text-lg  text-center w-40">
               Series Episodes: {countEpisodes}
             </p>
             <Progress
               value={episodeProgress}
               className="w-[80%]"
-              color="purple"
             />
           </div>
         </div>

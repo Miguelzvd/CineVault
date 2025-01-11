@@ -159,27 +159,29 @@ export const ContentCard = ({
           />
         </Button>
       </div>
-      <CardContent className="h-[250px] sm:h-[300px] md:h-[400px] aspect-[2/3] p-0 pb-2">
-        <img
-          src={image === "N/A" ? default_image_content : image}
-          alt="Card Image"
-          className="w-full h-full object-cover mx-auto"
-        />
-      </CardContent>
-      <CardFooter className="flex flex-col w-64 items-start pb-2 px-2 overflow-hidden">
-        <CardTitle className="text-lg font-medium break-words whitespace-normal">
-          {title}
-        </CardTitle>
-        <CardDescription className="text-gray-600 dark:text-gray-400 flex flex-row gap-2 mt-2">
-          <p>
-            <span className="text-primary">Year: </span>
-            {year}
-          </p>
-          <p>
-            <span className="text-primary">Type: </span>
-            {type}
-          </p>
-        </CardDescription>
+      <CardContent className="h-[300px] aspect-[2/3] p-0 pb-2">
+  <img
+    src={image === "N/A" ? default_image_content : image}
+    alt="Card Image"
+    className="w-full h-full object-cover mx-auto"
+  />
+</CardContent>
+
+<CardFooter className="flex flex-col w-48 items-start pb-2 px-2 overflow-hidden">
+  <CardTitle className="text-sm sm:text-base font-medium break-words whitespace-normal">
+    {title}
+  </CardTitle>
+  <CardDescription className="text-gray-600 dark:text-gray-400 flex flex-row gap-2 mt-2">
+    <p>
+      <span className="text-primary">Year: </span>
+      {year}
+    </p>
+    <p>
+      <span className="text-primary">Type: </span>
+      {type}
+    </p>
+  </CardDescription>
+
       </CardFooter>
     </Card>
   );
