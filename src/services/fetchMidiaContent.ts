@@ -5,15 +5,16 @@ const baseURL = "http://www.omdbapi.com/";
 const key = import.meta.env.VITE_API_KEY;
 
 export const fetchMidiaContent = async (
-  title?: string | undefined
+  title?: string,
+  page: number = 1, // Parâmetro da página
 ): Promise<IMidiaContentResponse | undefined> => {
   let queryString: string;
 
+  // Verificando se o título foi passado
   if (!title) {
-    queryString = `s=movie&type=movie&y=2024&apikey=${key}`;
+    queryString = `s=movie&type=movie&y=2024&apikey=${key}&page=${page}&r=json`;
   } else {
-    const queryParams = [`s=${title}`, `apikey=${key}`];
-
+    const queryParams = [`s=${title}`, `apikey=${key}`, `page=${page}`, `r=json`];
     queryString = queryParams.join("&");
   }
 
