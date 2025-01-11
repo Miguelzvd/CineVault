@@ -19,8 +19,6 @@ interface ContentCardProps {
   image: string;
   year: string;
   type: string;
-  onSave?: (item: IMidiaContent) => void;
-  onRemove?: (item: IMidiaContent) => void;
 }
 
 export const ContentCard = ({
@@ -30,21 +28,22 @@ export const ContentCard = ({
   year,
   type,
 }: ContentCardProps) => {
-  const getSavedMidiaContent = () => {
-    const data = getItem();
-
-    if (data) {
-      return data;
-    } else {
-      return [];
-    }
-  };
-
   const { getItem, removeItem, addItem } = useLocalStorage("midia_contents");
+  const {
+    getItem: getWatchedItem,
+    addItem: addWatchedItem,
+    removeItem: removeWatchedItem,
+  } = useLocalStorage("watched_contents");
+
   const [savedMidiaContent, setSavedMidiaContent] = useState<IMidiaContent[]>(
-    getSavedMidiaContent()
+    () => getItem() || []
   );
+  const [watchedContent, setWatchedContent] = useState<IMidiaContent[]>(
+    () => getWatchedItem() || []
+  );
+
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isWatched, setIsWatched] = useState<boolean>(false);
 
   const handleSaveMidiaContent = (content: IMidiaContent) => {
     try {
@@ -56,13 +55,13 @@ export const ContentCard = ({
       console.error("Failed to save content:", error);
     }
   };
-  
+
   const handleRemoveMidiaContent = (content: IMidiaContent) => {
     try {
       const updatedMidiaContent = savedMidiaContent.filter(
         (item) => item.imdbID !== content.imdbID
       );
-  
+
       if (updatedMidiaContent.length !== savedMidiaContent.length) {
         setSavedMidiaContent(updatedMidiaContent);
         removeItem(content);
@@ -74,14 +73,44 @@ export const ContentCard = ({
       console.error("Failed to remove content:", error);
     }
   };
-  
+
+  const handleMarkAsWatched = (content: IMidiaContent) => {
+    try {
+      if (!watchedContent.some((item) => item.imdbID === content.imdbID)) {
+        const updatedWatchedContent = [...watchedContent, content];
+        setWatchedContent(updatedWatchedContent);
+        addWatchedItem(content);
+        toast.success("Content marked as watched");
+      } else {
+        toast.error("Content already marked as watched");
+      }
+    } catch (error) {
+      console.error("Failed to mark content as watched:", error);
+    }
+  };
+
+  const handleUnmarkAsWatched = (content: IMidiaContent) => {
+    try {
+      const updatedWatchedContent = watchedContent.filter(
+        (item) => item.imdbID !== content.imdbID
+      );
+
+      if (updatedWatchedContent.length !== watchedContent.length) {
+        setWatchedContent(updatedWatchedContent);
+        removeWatchedItem(content);
+        toast.success("Content unmarked as watched");
+      } else {
+        toast.error("Content not found in watched list");
+      }
+    } catch (error) {
+      console.error("Failed to unmark content as watched:", error);
+    }
+  };
+
   useEffect(() => {
-    setIsSaved(
-      savedMidiaContent.some(
-        (savedMidiaContent) => savedMidiaContent.imdbID === id
-      )
-    );
-  }, [savedMidiaContent, id]);
+    setIsSaved(savedMidiaContent.some((saved) => saved.imdbID === id));
+    setIsWatched(watchedContent.some((watched) => watched.imdbID === id));
+  }, [savedMidiaContent, watchedContent, id]);
 
   const midia_content = {
     imdbID: id,
@@ -117,8 +146,17 @@ export const ContentCard = ({
           variant="outline"
           className="group cursor-pointer transition-colors duration-300 w-8 h-8"
           size="icon"
+          onClick={() =>
+            isWatched
+              ? handleUnmarkAsWatched(midia_content)
+              : handleMarkAsWatched(midia_content)
+          }
         >
-          <Tv className="text-gray-400 group-hover:fill-sky-300 transition-colors duration-300" />
+          <Tv
+            className={`cursor-pointer transition-colors duration-300 ${
+              isWatched ? "fill-sky-300" : "text-gray-400"
+            }`}
+          />
         </Button>
       </div>
       <CardContent className="h-[250px] sm:h-[300px] md:h-[400px] aspect-[2/3] p-0 pb-2">
