@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 
 interface InputProps extends React.ComponentProps<"input"> {
   icon?: React.ReactNode;
-  handle?: () => void;
+  handleIconFunction?: () => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, icon, handle, ...props }, ref) => {
+  ({ className, type, icon, handleIconFunction, ...props }, ref) => {
     return (
       <div className="relative">
         <input
@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             role="button"
             tabIndex={0}
             className="cursor-pointer group text-gray-500 dark:text-gray-300 hover:bg-transparent absolute right-3 bottom-2 p-0"
-            onClick={handle}
+            onClick={handleIconFunction}
           >
             {icon}
           </div>

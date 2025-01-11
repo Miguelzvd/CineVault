@@ -1,12 +1,19 @@
-export interface IMovies {
-    Title: string,
-    Year: string,
-    imdbID: string,
-    Type: string,
-    Poster: string
+export interface IMidiaContent {
+  Title: string;
+  Year: string;
+  imdbID: string;
+  Type: string;
+  Poster: string;
+  id?: number;
 }
 
-export const movies: IMovies[] = [
+export interface IMidiaContentResponse {
+  Search: IMidiaContent[];
+  totalResults: string;
+  Response: string;
+}
+
+export const movies: IMidiaContent[] = [
   {
     Title: "The Avengers",
     Year: "2012",
