@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+# 📽️ **cine-vault.io**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**cine-vault.io** is a web application designed to help users organize their favorite movies and series, save content for future reference, and track their watched items.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 **Getting Started**
 
-## Expanding the ESLint configuration
+Follow these steps to set up and run the project locally:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### **1. Clone the Repository**
+```bash
+git clone <repository-url>
+cd cine-vault.io
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### **2. Install Dependencies**
+Make sure you have Node.js installed. Then, install the project dependencies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### **3. Run the Development Server**
+Start the application in development mode:
+
+```bash
+npm run dev
+```
+---
+
+## 🌐 **Application Access**
+The application will be accessible at:  
+**`http://localhost:5173`**
+
+---
+
+## 🛠 **Technologies Used**
+This project is built using:
+- **Tailwind CSS**: For styling and responsive design.  
+- **shadcn/ui**: Provides reusable components.  
+- **Magic UI**: Adds additional visual enhancements.  
+
+---
+
+## 📂 **Project Structure**
+- **`/src`**: Contains all the source code, including components, hooks, and pages.  
+- **`/public`**: Static assets like images and icons.  
+- **`/styles`**: Custom styling configurations, including Tailwind settings.  
+
+---
+
+## ✨ **Features**
+- **Save Content**: Save movies and series to watch later.  
+- **Watch Tracking**: Mark content as watched or unwatched.  
+- **Progress Monitoring**: View progress for movies, series, and episodes.  
+- **Responsive Design**: Optimized for all screen sizes.  
+
+---
+
+## 📜 **License**
+This project is licensed under the **[MIT License](LICENSE)**.  
+
+---
+
+### 🤝 **Contribute**
+Feel free to:  
+- Suggest new features.  
+- Report bugs via the repository's issue tracker.  
+- Contribute to the codebase.  
+
+Thank you for your support! 😊
