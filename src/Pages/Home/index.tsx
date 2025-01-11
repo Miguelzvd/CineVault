@@ -149,7 +149,7 @@ export function Home() {
                   <PaginationItem>
                     <PaginationNext
                       className={`${
-                        page === totalPages
+                        page >= totalPages
                           ? "cursor-not-allowed hover:bg-transparent"
                           : "cursor-pointer"
                       }`}
