@@ -58,7 +58,7 @@ export function Home() {
   return (
     <>
       <div className="w-fit m-auto flex flex-col gap-2 items-center relative">
-        <BoxReveal boxColor={"#5046e6"} duration={0.5}>
+        <BoxReveal boxColor={"#f7cb2c"} duration={0.5}>
           <h2 className="text-xl font-bold">What will be your next title?</h2>
         </BoxReveal>
 
