@@ -1,39 +1,38 @@
+import { IMidiaContent } from "@/interfaces/IMidiaContentResponse";
+
 export const useLocalStorage = (key: string) => {
-  const getItem = () => {
+  const getItem = (): IMidiaContent[] => {
     try {
       const item = window.localStorage.getItem(key);
-      if (item) {
-        return Array.isArray(JSON.parse(item)) ? JSON.parse(item) : [];
-      }
-      return [];
+      return item ? JSON.parse(item) : [];
     } catch (error) {
-      console.log("Erro ao recuperar do localStorage:", error);
+      console.error("Failed to retrieve data from localStorage:", error);
       return [];
     }
   };
 
-  const setItem = (value: unknown) => {
+  const setItem = (midiaContent: IMidiaContent[]) => {
     try {
-      const existingItems = getItem();
-      console.log(existingItems);
-      if (value !== null && value !== undefined) {
-        existingItems.push(value);
-      }
-
-      window.localStorage.setItem(key, JSON.stringify(existingItems));
+      window.localStorage.setItem(key, JSON.stringify(midiaContent));
     } catch (error) {
-      console.log("Erro ao salvar no localStorage:", error);
+      console.error("Failed to save data to localStorage:", error);
     }
   };
 
-  const removeItem = () => {
-    try {
-      window.localStorage.getItem(key);
-
-    } catch (error) {
-      console.log(error);
+  const addItem = (midiaContent: IMidiaContent) => {
+    const existingItems = getItem();
+    if (!existingItems.some((item) => item.imdbID === midiaContent.imdbID)) {
+      setItem([...existingItems, midiaContent]);
     }
   };
 
-  return { setItem, getItem, removeItem };
+  const removeItem = (midiaContent: IMidiaContent) => {
+    const existingItems = getItem();
+    const updatedItems = existingItems.filter(
+      (item) => item.imdbID !== midiaContent.imdbID
+    );
+    setItem(updatedItems);
+  };
+
+  return { getItem, setItem, addItem, removeItem };
 };

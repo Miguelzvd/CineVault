@@ -7,13 +7,13 @@ import {
   CardFooter,
   CardTitle,
 } from "@/components/ui/card";
-import { IMidiaContent } from "@/constants/movies";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { IMidiaContent } from "@/interfaces/IMidiaContentResponse";
 import { Star, Tv } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function WatchedContent() {
-  const { getItem, removeItem } = useLocalStorage("movies");
+  const { getItem } = useLocalStorage("movies");
   const [savedMovies, setSavedMovies] = useState<IMidiaContent[]>([]);
 
   useEffect(() => {
@@ -22,13 +22,15 @@ export function WatchedContent() {
   }, []);
 
   const handleRemoveMovie = (movie: IMidiaContent) => {
-    removeItem();
     setSavedMovies((prev) =>
       prev.filter((item) => item.imdbID !== movie.imdbID)
     );
   };
+  
+
+  console.log(savedMovies);
   return (
-    <MidiaContentSection title="Your watched content 😎">
+    <MidiaContentSection title="Your watched content 📺">
       {savedMovies.map((movie) => (
         <Card
           key={movie.imdbID}
