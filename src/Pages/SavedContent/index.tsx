@@ -17,16 +17,7 @@ import { Progress } from "@/components/ui/progress"; // Assuming Progress is a r
 export function SavedContent() {
   const { getItem } = useLocalStorage("midia_contents");
 
-  const getSavedMidiaContent = () => {
-    const data = getItem();
-    if (data) {
-      return data;
-    } else {
-      return [];
-    }
-  };
-
-  const [savedMidiaContent] = useState<IMidiaContent[]>(getSavedMidiaContent());
+  const [savedMidiaContent] = useState<IMidiaContent[]>(() => getItem() || []);
   const [itemsLength, setItemsLength] = useState(5);
   const total_content = savedMidiaContent.length;
   const itemsPerPage = 10;
@@ -105,7 +96,7 @@ export function SavedContent() {
         </h2>
 
         <p className="font-bold text-base lg:text-lg  text-center">
-          Total: {countMovies}
+          Total: {total_content}
         </p>
 
         <hr className="" />

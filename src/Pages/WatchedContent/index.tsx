@@ -97,7 +97,7 @@ export function WatchedContent() {
         </h2>
 
         <p className="font-bold text-base lg:text-lg  text-center">
-          Total: {countMovies}
+          Total: {total_content}
         </p>
 
         <hr className="" />
