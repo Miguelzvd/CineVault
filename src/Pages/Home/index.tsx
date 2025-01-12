@@ -80,7 +80,7 @@ export function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-end">
+    <div className="flex flex-col justify-end gap-16">
       <div className="w-fit m-auto flex flex-col gap-2 items-center relative">
         <BoxReveal boxColor={"#f7cb2c"} duration={0.5}>
           <h2 className="text-xl font-bold">What will be your next title?</h2>
@@ -106,7 +106,7 @@ export function Home() {
         </div>
       </div>
 
-      {!isLoading ? (
+      {isLoading ? (
         <div className="w-full flex justify-center items-center h-[20rem]">
           <LoadingSpinner />
         </div>
