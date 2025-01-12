@@ -10,8 +10,10 @@ export function Layout({ children }: LayoutProps) {
     <>
       <div className="flex flex-col gap-16 min-h-screen">
         <Header />
-        <div className="flex flex-col">
-          <main className="flex flex-col justify-end gap-16 mb-4">{children}</main>
+        <div className="flex flex-col min-h-[86vh] justify-between">
+          <main className="flex flex-col justify-end gap-16 mb-8">
+            {children}
+          </main>
           <footer className="flex flex-col items-center mb-4 lg:items-start lg:mx-[2.5%]">
             <p>
               Project developed by{" "}

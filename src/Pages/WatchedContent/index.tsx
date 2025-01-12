@@ -15,7 +15,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 const NoContentMessage = () => (
-  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[95%] h-96">
+  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[95%] min-h-[70vh] mb-8">
     <p className="text-xl font-semibold p-4">
       You haven't watched anything yet. Start adding your favorite{" "}
       <strong className="text-yellow-500">movies</strong>,{" "}
@@ -97,7 +97,7 @@ export function WatchedContent() {
         </h2>
 
         <p className="font-bold text-base lg:text-lg  text-center">
-          Total: {countMovies}
+          Total: {total_content}
         </p>
 
         <hr className="" />
