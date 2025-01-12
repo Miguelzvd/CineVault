@@ -2,7 +2,7 @@ import { ContentCard } from "@/components/ContentCard";
 import { MidiaContentSection } from "@/components/MidiaContentSection";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { IMidiaContent } from "@/interfaces/IMidiaContentResponse";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -15,7 +15,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 const NoContentMessage = () => (
-  <div className="flex justify-center items-center w-[70% ] h-[300px] ">
+  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[70%] h-[300px] ">
     <p className="text-xl font-semibold">
       You haven't watched anything yet. Start adding your favorite{" "}
       <strong className="text-yellow-500">movies</strong>,{" "}
@@ -41,8 +41,30 @@ export function WatchedContent() {
   const total_content = watchedContent.length;
   const itemsPerPage = 10;
   const [page, setPage] = useState<number>(1);
-
+  const [itemsLength, setItemsLength] = useState(5);
   const totalPages = Math.ceil(total_content / itemsPerPage);
+
+  useEffect(() => {
+    const updateItemsLength = () => {
+      // sm
+      if (window.innerWidth <= 640) {
+        setItemsLength(2);
+      }
+      // md
+      else if (window.innerWidth <= 768) {
+        setItemsLength(3);
+      }
+      // Default
+      else {
+        setItemsLength(5);
+      }
+    };
+
+    updateItemsLength();
+    window.addEventListener("resize", updateItemsLength);
+
+    return () => window.removeEventListener("resize", updateItemsLength);
+  }, []);
 
   const handlePaginationChange = (newPage: number) => {
     setPage(newPage);
@@ -85,7 +107,7 @@ export function WatchedContent() {
             <p className="font-bold text-base lg:text-lg  text-center w-40">
               Movies: {countMovies}
             </p>
-            <Progress value={movieProgress} className="w-[80%]"  />
+            <Progress value={movieProgress} className="w-[80%]" />
           </div>
 
           <hr className="" />
@@ -103,10 +125,7 @@ export function WatchedContent() {
             <p className="font-bold text-base lg:text-lg  text-center w-40">
               Series Episodes: {countEpisodes}
             </p>
-            <Progress
-              value={episodeProgress}
-              className="w-[80%]"
-            />
+            <Progress value={episodeProgress} className="w-[80%]" />
           </div>
         </div>
       </div>
@@ -121,12 +140,16 @@ export function WatchedContent() {
                 <PaginationItem>
                   <PaginationPrevious
                     className={`${
-                      page === 1 ? "cursor-not-allowed" : "cursor-pointer"
+                      page === 1
+                        ? "cursor-not-allowed hover:bg-transparent"
+                        : "cursor-pointer"
                     }`}
                     onClick={() => page > 1 && handlePaginationChange(page - 1)}
                   />
                 </PaginationItem>
-                {page > 1 && (
+
+                {(page > 3 && itemsLength > 2) ||
+                (itemsLength <= 2 && page >= totalPages - 2) ? (
                   <PaginationItem>
                     <PaginationLink
                       href="#"
@@ -135,15 +158,41 @@ export function WatchedContent() {
                       1
                     </PaginationLink>
                   </PaginationItem>
+                ) : null}
+
+                {(page > 3 && itemsLength > 2) ||
+                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                  <PaginationEllipsis />
+                ) : null}
+
+                {itemsLength > 2 ? (
+                  Array.from(
+                    { length: itemsLength },
+                    (_, index) => index + page - 2
+                  )
+                    .filter((p) => p > 0 && p <= totalPages)
+                    .map((p) => (
+                      <PaginationItem key={p}>
+                        <PaginationLink
+                          href="#"
+                          isActive={p === page}
+                          onClick={() => handlePaginationChange(p)}
+                        >
+                          {p}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))
+                ) : (
+                  <PaginationItem>
+                    <PaginationLink href="#" isActive={true}>
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
                 )}
-                {page > 2 && <PaginationEllipsis />}
-                <PaginationItem>
-                  <PaginationLink href="#" isActive>
-                    {page}
-                  </PaginationLink>
-                </PaginationItem>
-                {page < totalPages - 1 && <PaginationEllipsis />}
-                {page < totalPages && (
+
+                {page < totalPages - 2 && <PaginationEllipsis />}
+
+                {page < totalPages - 2 && (
                   <PaginationItem>
                     <PaginationLink
                       href="#"
@@ -153,11 +202,12 @@ export function WatchedContent() {
                     </PaginationLink>
                   </PaginationItem>
                 )}
+
                 <PaginationItem>
                   <PaginationNext
                     className={`${
                       page >= totalPages
-                        ? "cursor-not-allowed"
+                        ? "cursor-not-allowed hover:bg-transparent"
                         : "cursor-pointer"
                     }`}
                     onClick={() =>

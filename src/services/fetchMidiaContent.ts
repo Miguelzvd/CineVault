@@ -2,19 +2,24 @@ import { IMidiaContentResponse } from "@/interfaces/IMidiaContentResponse";
 import axios from "axios";
 
 const baseURL = "http://www.omdbapi.com/";
-const key = import.meta.env.VITE_API_KEY;
+// const key = import.meta.env.VITE_API_KEY;
+const key = "4192217e";
 
 export const fetchMidiaContent = async (
   title?: string,
-  page: number = 1, // Parâmetro da página
+  page: number = 1
 ): Promise<IMidiaContentResponse | undefined> => {
   let queryString: string;
 
-  // Verificando se o título foi passado
   if (!title) {
     queryString = `s=movie&type=movie&y=2024&apikey=${key}&page=${page}&r=json`;
   } else {
-    const queryParams = [`s=${title}`, `apikey=${key}`, `page=${page}`, `r=json`];
+    const queryParams = [
+      `s=${title}`,
+      `apikey=${key}`,
+      `page=${page}`,
+      `r=json`,
+    ];
     queryString = queryParams.join("&");
   }
 
@@ -26,7 +31,5 @@ export const fetchMidiaContent = async (
       throw new Error("Error when fetching media data");
     });
 
-  console.log("midia testing: ", midia);
-  console.log(`${baseURL}?${queryString}`);
   return midia;
 };

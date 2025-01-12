@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import BoxReveal from "@/components/ui/box-reveal";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MidiaContentSection } from "@/components/MidiaContentSection";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { useMidiaData } from "@/hooks/useMidiaData";
@@ -21,6 +21,7 @@ export function Home() {
   const [searchValue, setSearchValue] = useState<string | undefined>("");
   const [page, setPage] = useState<number>(1);
   const [pageSize] = useState<number>(10);
+  const [itemsLength, setItemsLength] = useState(5);
 
   const {
     data: midiaContentResponse,
@@ -32,6 +33,29 @@ export function Home() {
   const totalResults = midiaContentResponse?.totalResults
     ? Number(midiaContentResponse.totalResults)
     : 0;
+
+  useEffect(() => {
+    const updateItemsLength = () => {
+      // sm
+      if (window.innerWidth <= 640) {
+        setItemsLength(2);
+      }
+      // md
+      else if (window.innerWidth <= 768) {
+        setItemsLength(3);
+      }
+      // Default
+      else {
+        setItemsLength(5);
+      }
+    };
+
+    updateItemsLength();
+    window.addEventListener("resize", updateItemsLength);
+
+    return () => window.removeEventListener("resize", updateItemsLength);
+  }, []);
+
   const totalPages = Math.ceil(totalResults / pageSize);
 
   const handlePaginationChange = (newPage: number) => {
@@ -62,7 +86,7 @@ export function Home() {
           <h2 className="text-xl font-bold">What will be your next title?</h2>
         </BoxReveal>
 
-        <div className="w-96">
+        <div className="w-72 sm:w-96">
           <Input
             className="shadow-sm"
             placeholder="Search for a movie or series"
@@ -106,7 +130,8 @@ export function Home() {
                     />
                   </PaginationItem>
 
-                  {page > 2 && (
+                  {(page > 3 && itemsLength > 2) ||
+                  (itemsLength <= 2 && page >= totalPages - 2) ? (
                     <PaginationItem>
                       <PaginationLink
                         href="#"
@@ -115,27 +140,41 @@ export function Home() {
                         1
                       </PaginationLink>
                     </PaginationItem>
+                  ) : null}
+
+                  {(page > 3 && itemsLength > 2) ||
+                  (itemsLength <= 2 && page >= totalPages - 2) ? (
+                    <PaginationEllipsis />
+                  ) : null}
+
+                  {itemsLength > 2 ? (
+                    Array.from(
+                      { length: itemsLength },
+                      (_, index) => index + page - 2
+                    )
+                      .filter((p) => p > 0 && p <= totalPages)
+                      .map((p) => (
+                        <PaginationItem key={p}>
+                          <PaginationLink
+                            href="#"
+                            isActive={p === page}
+                            onClick={() => handlePaginationChange(p)}
+                          >
+                            {p}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))
+                  ) : (
+                    <PaginationItem>
+                      <PaginationLink href="#" isActive={true}>
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
                   )}
-
-                  {page > 3 && <PaginationEllipsis />}
-
-                  {Array.from({ length: 5 }, (_, index) => index + page - 2)
-                    .filter((p) => p > 0 && p <= totalPages)
-                    .map((p) => (
-                      <PaginationItem key={p}>
-                        <PaginationLink
-                          href="#"
-                          isActive={p === page}
-                          onClick={() => handlePaginationChange(p)}
-                        >
-                          {p}
-                        </PaginationLink>
-                      </PaginationItem>
-                    ))}
 
                   {page < totalPages - 2 && <PaginationEllipsis />}
 
-                  {page < totalPages - 1 && (
+                  {page < totalPages - 2 && (
                     <PaginationItem>
                       <PaginationLink
                         href="#"
