@@ -99,7 +99,7 @@ export function SavedContent() {
 
   return (
     <>
-      <div className="min-w-[50%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
+      <div className="min-w-[65%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
         <h2 className="text-xl font-semibold text-center">
           Your saved content ⭐
         </h2>
