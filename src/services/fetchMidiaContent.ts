@@ -2,8 +2,7 @@ import { IMidiaContentResponse } from "@/interfaces/IMidiaContentResponse";
 import axios from "axios";
 
 const baseURL = "https://www.omdbapi.com/";
-// const key = import.meta.env.VITE_API_KEY;
-const key = "4192217e";
+const key = import.meta.env.VITE_API_KEY;
 
 export const fetchMidiaContent = async (
   title?: string,
