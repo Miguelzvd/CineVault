@@ -68,7 +68,7 @@ export function Home() {
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-10">
+      <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-screen gap-8 p-6 mb-8 rounded-md">
         <h2 className="text-2xl font-bold text-red-600">
           Something went wrong!
         </h2>
@@ -80,7 +80,7 @@ export function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-end gap-16">
+    <>
       <div className="w-fit m-auto flex flex-col gap-2 items-center relative">
         <BoxReveal boxColor={"#f7cb2c"} duration={0.5}>
           <h2 className="text-xl font-bold">What will be your next title?</h2>
@@ -116,91 +116,93 @@ export function Home() {
             title="Movies and Series"
             pagination={
               <Pagination className="w-full flex flex-row self-end">
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    className={`${
-                      page === 1
-                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
-                        : "cursor-pointer"
-                    }`}
-                    onClick={() => page > 1 && handlePaginationChange(page - 1)}
-                  />
-                </PaginationItem>
-
-                {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 &&
-                  page >= totalPages - 2 &&
-                  totalPages !== 1) ? (
+                <PaginationContent>
                   <PaginationItem>
-                    <PaginationLink
-                      href="#"
-                      onClick={() => handlePaginationChange(1)}
-                    >
-                      1
-                    </PaginationLink>
+                    <PaginationPrevious
+                      className={`${
+                        page === 1
+                          ? "cursor-not-allowed hover:bg-transparent text-gray-400"
+                          : "cursor-pointer"
+                      }`}
+                      onClick={() =>
+                        page > 1 && handlePaginationChange(page - 1)
+                      }
+                    />
                   </PaginationItem>
-                ) : null}
 
-                {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 &&
-                  page >= totalPages - 2 &&
-                  totalPages !== 1) ? (
-                  <PaginationEllipsis />
-                ) : null}
+                  {(page > 3 && itemsLength > 2) ||
+                  (itemsLength <= 2 &&
+                    page >= totalPages - 2 &&
+                    totalPages !== 1) ? (
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#"
+                        onClick={() => handlePaginationChange(1)}
+                      >
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                  ) : null}
 
-                {itemsLength > 2 ? (
-                  Array.from(
-                    { length: itemsLength },
-                    (_, index) => index + page - 2
-                  )
-                    .filter((p) => p > 0 && p <= totalPages)
-                    .map((p) => (
-                      <PaginationItem key={p}>
-                        <PaginationLink
-                          href="#"
-                          isActive={p === page}
-                          onClick={() => handlePaginationChange(p)}
-                        >
-                          {p}
-                        </PaginationLink>
-                      </PaginationItem>
-                    ))
-                ) : (
+                  {(page > 3 && itemsLength > 2) ||
+                  (itemsLength <= 2 &&
+                    page >= totalPages - 2 &&
+                    totalPages !== 1) ? (
+                    <PaginationEllipsis />
+                  ) : null}
+
+                  {itemsLength > 2 ? (
+                    Array.from(
+                      { length: itemsLength },
+                      (_, index) => index + page - 2
+                    )
+                      .filter((p) => p > 0 && p <= totalPages)
+                      .map((p) => (
+                        <PaginationItem key={p}>
+                          <PaginationLink
+                            href="#"
+                            isActive={p === page}
+                            onClick={() => handlePaginationChange(p)}
+                          >
+                            {p}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))
+                  ) : (
+                    <PaginationItem>
+                      <PaginationLink href="#" isActive={true}>
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
+                  )}
+
+                  {page < totalPages - 2 && <PaginationEllipsis />}
+
+                  {page < totalPages - 2 && (
+                    <PaginationItem>
+                      <PaginationLink
+                        href="#"
+                        onClick={() => handlePaginationChange(totalPages)}
+                      >
+                        {totalPages}
+                      </PaginationLink>
+                    </PaginationItem>
+                  )}
+
                   <PaginationItem>
-                    <PaginationLink href="#" isActive={true}>
-                      {page}
-                    </PaginationLink>
+                    <PaginationNext
+                      className={`${
+                        page >= totalPages
+                          ? "cursor-not-allowed hover:bg-transparent text-gray-400"
+                          : "cursor-pointer"
+                      }`}
+                      onClick={() =>
+                        page < totalPages && handlePaginationChange(page + 1)
+                      }
+                    />
                   </PaginationItem>
-                )}
-
-                {page < totalPages - 2 && <PaginationEllipsis />}
-
-                {page < totalPages - 2 && (
-                  <PaginationItem>
-                    <PaginationLink
-                      href="#"
-                      onClick={() => handlePaginationChange(totalPages)}
-                    >
-                      {totalPages}
-                    </PaginationLink>
-                  </PaginationItem>
-                )}
-
-                <PaginationItem>
-                  <PaginationNext
-                    className={`${
-                      page >= totalPages
-                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
-                        : "cursor-pointer"
-                    }`}
-                    onClick={() =>
-                      page < totalPages && handlePaginationChange(page + 1)
-                    }
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+                </PaginationContent>
+              </Pagination>
             }
           >
             {midiaContent.map((content) => (
@@ -225,6 +227,6 @@ export function Home() {
           </p>
         </div>
       )}
-    </div>
+    </>
   );
 }
