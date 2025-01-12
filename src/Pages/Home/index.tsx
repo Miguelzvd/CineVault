@@ -68,7 +68,7 @@ export function Home() {
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-[70vh] gap-8 p-6 mb-8 rounded-md">
+      <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-[70vh] gap-8 p-6 mb-8 rounded-md shadow-sm">
         <h2 className="text-2xl font-bold text-red-600">
           Something went wrong!
         </h2>
@@ -107,7 +107,7 @@ export function Home() {
       </div>
 
       {isLoading ? (
-        <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-[70vh] gap-8 p-6 mb-8 rounded-md">
+        <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-[70vh] gap-8 p-6 mb-8 rounded-md shadow-sm">
           <LoadingSpinner />
         </div>
       ) : midiaContent && midiaContent.length > 0 ? (
