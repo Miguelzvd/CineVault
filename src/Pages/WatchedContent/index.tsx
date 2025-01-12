@@ -15,8 +15,8 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 const NoContentMessage = () => (
-  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[70%] h-[300px] ">
-    <p className="text-xl font-semibold">
+  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[95%] h-96">
+    <p className="text-xl font-semibold p-4">
       You haven't watched anything yet. Start adding your favorite{" "}
       <strong className="text-yellow-500">movies</strong>,{" "}
       <strong className="text-yellow-500">series</strong>, and{" "}
