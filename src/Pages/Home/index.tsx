@@ -68,7 +68,7 @@ export function Home() {
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-screen gap-8 p-6 mb-8 rounded-md">
+      <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-[70vh] gap-8 p-6 mb-8 rounded-md">
         <h2 className="text-2xl font-bold text-red-600">
           Something went wrong!
         </h2>
@@ -100,14 +100,14 @@ export function Home() {
             }}
             handleIconFunction={() => setSearchValue(inputValue)}
             icon={
-              <Search className="group-hover:text-gray-900 dark:group-hover:text-gray-50 transition-colors duration-300" />
+              <Search className="group-hover:text-gray-900 darkgroup-hover:text-gray-50 transition-colors duration-300" />
             }
           />
         </div>
       </div>
 
       {isLoading ? (
-        <div className="w-full flex justify-center items-center h-[20rem]">
+        <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-[70vh] gap-8 p-6 mb-8 rounded-md">
           <LoadingSpinner />
         </div>
       ) : midiaContent && midiaContent.length > 0 ? (
