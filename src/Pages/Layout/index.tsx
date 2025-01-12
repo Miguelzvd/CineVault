@@ -11,7 +11,19 @@ export function Layout({ children }: LayoutProps) {
         <Header />
         {children}
       </div>
-      <footer className="ml-12 mb-2">
+
+      <footer className="flex flex-col items-center mb-4 lg:items-start lg:mx-[2.5%]">
+        <p>
+          Project developed by{" "}
+          <a
+            href="https://github.com/Miguelzvd"
+            target="_blank"
+            className="text-primary font-semibold hover:text-blue-800 dark:hover:text-blue-500 transition-colors duration-300 hover:underline"
+          >
+            Miguel Azevedo
+          </a>{" "}
+          © 🎬
+        </p>
         <a
           href="https://www.flaticon.com/free-icons/cinema"
           title="cinema icons"
