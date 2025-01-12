@@ -76,8 +76,8 @@ export function SavedContent() {
   ).length;
 
   const NoContentMessage = () => (
-    <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[70%] h-[300px] ">
-      <p className="text-xl font-semibold">
+    <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[95%] h-96">
+      <p className="text-xl font-semibold p-4">
         You haven't saved anything yet. Start adding your favorite{" "}
         <strong className="text-yellow-500">movies</strong>,{" "}
         <strong className="text-yellow-500">series</strong>, and{" "}
@@ -99,7 +99,7 @@ export function SavedContent() {
 
   return (
     <>
-      <div className="min-w-[50%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
+      <div className="min-w-[65%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
         <h2 className="text-xl font-semibold text-center">
           Your saved content ⭐
         </h2>
@@ -148,7 +148,7 @@ export function SavedContent() {
                   <PaginationPrevious
                     className={`${
                       page === 1
-                        ? "cursor-not-allowed hover:bg-transparent"
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                         : "cursor-pointer"
                     }`}
                     onClick={() => page > 1 && handlePaginationChange(page - 1)}
@@ -156,7 +156,9 @@ export function SavedContent() {
                 </PaginationItem>
 
                 {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationItem>
                     <PaginationLink
                       href="#"
@@ -168,7 +170,9 @@ export function SavedContent() {
                 ) : null}
 
                 {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationEllipsis />
                 ) : null}
 
@@ -214,7 +218,7 @@ export function SavedContent() {
                   <PaginationNext
                     className={`${
                       page >= totalPages
-                        ? "cursor-not-allowed hover:bg-transparent"
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                         : "cursor-pointer"
                     }`}
                     onClick={() =>
