@@ -148,7 +148,7 @@ export function SavedContent() {
                   <PaginationPrevious
                     className={`${
                       page === 1
-                        ? "cursor-not-allowed hover:bg-transparent"
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                         : "cursor-pointer"
                     }`}
                     onClick={() => page > 1 && handlePaginationChange(page - 1)}
@@ -156,7 +156,9 @@ export function SavedContent() {
                 </PaginationItem>
 
                 {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationItem>
                     <PaginationLink
                       href="#"
@@ -168,7 +170,9 @@ export function SavedContent() {
                 ) : null}
 
                 {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationEllipsis />
                 ) : null}
 
@@ -214,7 +218,7 @@ export function SavedContent() {
                   <PaginationNext
                     className={`${
                       page >= totalPages
-                        ? "cursor-not-allowed hover:bg-transparent"
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                         : "cursor-pointer"
                     }`}
                     onClick={() =>

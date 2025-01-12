@@ -116,89 +116,91 @@ export function Home() {
             title="Movies and Series"
             pagination={
               <Pagination className="w-full flex flex-row self-end">
-                <PaginationContent>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    className={`${
+                      page === 1
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
+                        : "cursor-pointer"
+                    }`}
+                    onClick={() => page > 1 && handlePaginationChange(page - 1)}
+                  />
+                </PaginationItem>
+
+                {(page > 3 && itemsLength > 2) ||
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationItem>
-                    <PaginationPrevious
-                      className={`${
-                        page === 1
-                          ? "cursor-not-allowed hover:bg-transparent"
-                          : "cursor-pointer"
-                      }`}
-                      onClick={() =>
-                        page > 1 && handlePaginationChange(page - 1)
-                      }
-                    />
+                    <PaginationLink
+                      href="#"
+                      onClick={() => handlePaginationChange(1)}
+                    >
+                      1
+                    </PaginationLink>
                   </PaginationItem>
+                ) : null}
 
-                  {(page > 3 && itemsLength > 2) ||
-                  (itemsLength <= 2 && page >= totalPages - 2) ? (
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#"
-                        onClick={() => handlePaginationChange(1)}
-                      >
-                        1
-                      </PaginationLink>
-                    </PaginationItem>
-                  ) : null}
+                {(page > 3 && itemsLength > 2) ||
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
+                  <PaginationEllipsis />
+                ) : null}
 
-                  {(page > 3 && itemsLength > 2) ||
-                  (itemsLength <= 2 && page >= totalPages - 2) ? (
-                    <PaginationEllipsis />
-                  ) : null}
-
-                  {itemsLength > 2 ? (
-                    Array.from(
-                      { length: itemsLength },
-                      (_, index) => index + page - 2
-                    )
-                      .filter((p) => p > 0 && p <= totalPages)
-                      .map((p) => (
-                        <PaginationItem key={p}>
-                          <PaginationLink
-                            href="#"
-                            isActive={p === page}
-                            onClick={() => handlePaginationChange(p)}
-                          >
-                            {p}
-                          </PaginationLink>
-                        </PaginationItem>
-                      ))
-                  ) : (
-                    <PaginationItem>
-                      <PaginationLink href="#" isActive={true}>
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  )}
-
-                  {page < totalPages - 2 && <PaginationEllipsis />}
-
-                  {page < totalPages - 2 && (
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#"
-                        onClick={() => handlePaginationChange(totalPages)}
-                      >
-                        {totalPages}
-                      </PaginationLink>
-                    </PaginationItem>
-                  )}
-
+                {itemsLength > 2 ? (
+                  Array.from(
+                    { length: itemsLength },
+                    (_, index) => index + page - 2
+                  )
+                    .filter((p) => p > 0 && p <= totalPages)
+                    .map((p) => (
+                      <PaginationItem key={p}>
+                        <PaginationLink
+                          href="#"
+                          isActive={p === page}
+                          onClick={() => handlePaginationChange(p)}
+                        >
+                          {p}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))
+                ) : (
                   <PaginationItem>
-                    <PaginationNext
-                      className={`${
-                        page >= totalPages
-                          ? "cursor-not-allowed hover:bg-transparent"
-                          : "cursor-pointer"
-                      }`}
-                      onClick={() =>
-                        page < totalPages && handlePaginationChange(page + 1)
-                      }
-                    />
+                    <PaginationLink href="#" isActive={true}>
+                      {page}
+                    </PaginationLink>
                   </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+                )}
+
+                {page < totalPages - 2 && <PaginationEllipsis />}
+
+                {page < totalPages - 2 && (
+                  <PaginationItem>
+                    <PaginationLink
+                      href="#"
+                      onClick={() => handlePaginationChange(totalPages)}
+                    >
+                      {totalPages}
+                    </PaginationLink>
+                  </PaginationItem>
+                )}
+
+                <PaginationItem>
+                  <PaginationNext
+                    className={`${
+                      page >= totalPages
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
+                        : "cursor-pointer"
+                    }`}
+                    onClick={() =>
+                      page < totalPages && handlePaginationChange(page + 1)
+                    }
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
             }
           >
             {midiaContent.map((content) => (
