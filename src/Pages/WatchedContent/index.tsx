@@ -91,7 +91,7 @@ export function WatchedContent() {
 
   return (
     <>
-      <div className="min-w-[65%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
+      <div className="w-[95%] lg:w-[65%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 pb-8 lg:pb-4 rounded-sm border-[0.5px]">
         <h2 className="text-xl font-semibold text-center">
           Your watched content 📺
         </h2>
