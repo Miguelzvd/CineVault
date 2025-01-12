@@ -68,7 +68,7 @@ export function Home() {
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-10">
+      <div className="flex flex-col items-center justify-center text-center py-10 border-[0.5px] m-auto w-[95%] min-h-screen gap-8 p-6 mb-8 rounded-md">
         <h2 className="text-2xl font-bold text-red-600">
           Something went wrong!
         </h2>
@@ -121,7 +121,7 @@ export function Home() {
                     <PaginationPrevious
                       className={`${
                         page === 1
-                          ? "cursor-not-allowed hover:bg-transparent"
+                          ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                           : "cursor-pointer"
                       }`}
                       onClick={() =>
@@ -131,7 +131,9 @@ export function Home() {
                   </PaginationItem>
 
                   {(page > 3 && itemsLength > 2) ||
-                  (itemsLength <= 2 && page >= totalPages - 2) ? (
+                  (itemsLength <= 2 &&
+                    page >= totalPages - 2 &&
+                    totalPages !== 1) ? (
                     <PaginationItem>
                       <PaginationLink
                         href="#"
@@ -143,7 +145,9 @@ export function Home() {
                   ) : null}
 
                   {(page > 3 && itemsLength > 2) ||
-                  (itemsLength <= 2 && page >= totalPages - 2) ? (
+                  (itemsLength <= 2 &&
+                    page >= totalPages - 2 &&
+                    totalPages !== 1) ? (
                     <PaginationEllipsis />
                   ) : null}
 
@@ -189,7 +193,7 @@ export function Home() {
                     <PaginationNext
                       className={`${
                         page >= totalPages
-                          ? "cursor-not-allowed hover:bg-transparent"
+                          ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                           : "cursor-pointer"
                       }`}
                       onClick={() =>

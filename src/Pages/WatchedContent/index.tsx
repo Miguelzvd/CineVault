@@ -15,8 +15,8 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 const NoContentMessage = () => (
-  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[70%] h-[300px] ">
-    <p className="text-xl font-semibold">
+  <div className="flex justify-center items-center mx-auto border-[0.5px] rounded-sm w-[95%] h-96">
+    <p className="text-xl font-semibold p-4">
       You haven't watched anything yet. Start adding your favorite{" "}
       <strong className="text-yellow-500">movies</strong>,{" "}
       <strong className="text-yellow-500">series</strong>, and{" "}
@@ -91,7 +91,7 @@ export function WatchedContent() {
 
   return (
     <>
-      <div className="w-[50%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
+      <div className="min-w-[65%] h-fit mx-auto flex flex-col gap-4 shadow-sm p-4 rounded-sm border-[0.5px]">
         <h2 className="text-xl font-semibold text-center">
           Your watched content 📺
         </h2>
@@ -141,7 +141,7 @@ export function WatchedContent() {
                   <PaginationPrevious
                     className={`${
                       page === 1
-                        ? "cursor-not-allowed hover:bg-transparent"
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                         : "cursor-pointer"
                     }`}
                     onClick={() => page > 1 && handlePaginationChange(page - 1)}
@@ -149,7 +149,9 @@ export function WatchedContent() {
                 </PaginationItem>
 
                 {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationItem>
                     <PaginationLink
                       href="#"
@@ -161,7 +163,9 @@ export function WatchedContent() {
                 ) : null}
 
                 {(page > 3 && itemsLength > 2) ||
-                (itemsLength <= 2 && page >= totalPages - 2) ? (
+                (itemsLength <= 2 &&
+                  page >= totalPages - 2 &&
+                  totalPages !== 1) ? (
                   <PaginationEllipsis />
                 ) : null}
 
@@ -207,7 +211,7 @@ export function WatchedContent() {
                   <PaginationNext
                     className={`${
                       page >= totalPages
-                        ? "cursor-not-allowed hover:bg-transparent"
+                        ? "cursor-not-allowed hover:bg-transparent text-gray-400"
                         : "cursor-pointer"
                     }`}
                     onClick={() =>
