@@ -1,7 +1,7 @@
 import { IMidiaContentResponse } from "@/interfaces/IMidiaContentResponse";
 import axios from "axios";
 
-const baseURL = "http://www.omdbapi.com/";
+const baseURL = "https://www.omdbapi.com/";
 // const key = import.meta.env.VITE_API_KEY;
 const key = "4192217e";
 
