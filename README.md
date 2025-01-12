@@ -4,6 +4,19 @@
 
 ---
 
+## 🎞️ **Check Out cine-vault!**
+
+You can explore **cine-vault** in two ways:
+
+1. **Access the Live Version:**  
+   You can access the hosted project on Vercel here: [cine-vault](https://cine-vault-eqtbo5yww-miguelzvds-projects.vercel.app).  
+   No setup required, just start using it directly!
+
+2. **Run Locally:**  
+   If you'd like to run the project on your own system, follow the steps below.
+
+---
+
 # 💡 About the Project
 
 **cine-vault** was built with the goal of offering a unique experience to users who wish to:
@@ -28,7 +41,20 @@ git clone <repository-url>
 cd cine-vault.io
 ```
 
-### **2. Install Dependencies**
+### **2. Include the API Key**
+
+1. Visit [OMDb API](https://www.omdbapi.com/apikey.aspx) and register to create a free API key.
+2. After obtaining your API key, follow these steps:
+
+With the project open, create a file named `.env` in the root directory. Inside the file, add the following line:
+
+```javascript
+VITE_API_KEY = "your_api_key_here";
+```
+
+Replace `your_api_key_here` with the API key you received from OMDb in your e-mail.
+
+### **3. Install Dependencies**
 
 Make sure you have Node.js installed. Then, install the project dependencies:
 
@@ -36,7 +62,7 @@ Make sure you have Node.js installed. Then, install the project dependencies:
 npm install
 ```
 
-### **3. Run the Development Server**
+### **4. Run the Development Server**
 
 Start the application in development mode:
 
@@ -57,12 +83,14 @@ The application will be accessible at:
 
 This project is built using:
 
+- **Vercel**: Used for deploying the project.
 - **Tailwind CSS**: For styling and responsive design.
 - **shadcn/ui**: Provides reusable components.
 - **Magic UI**: Adds additional visual enhancements.
 - **Axios**: Used for making HTTP requests to fetch content.
 - **React Query**: Manages server-state data fetching, caching, and synchronization.
 - **Sonner**: A modern toast notification library to display success and error messages.
+
 ---
 
 ## 📂 **Project Structure**
