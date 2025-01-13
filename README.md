@@ -9,7 +9,7 @@
 You can explore **cine-vault** in two ways:
 
 1. **Access the Live Version:**  
-   You can access the hosted project on Vercel here: [cine-vault](https://cine-vault-prod.vercel.app/).  
+   You can access the hosted project on Vercel here: <a href="https://cine-vault-prod.vercel.app/" target="_blank">cine-vault</a>.
    No setup required, just start using it directly!
 
 2. **Run Locally:**  
