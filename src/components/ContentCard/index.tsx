@@ -44,6 +44,7 @@ export const ContentCard = ({
 
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isWatched, setIsWatched] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const handleSaveMidiaContent = (content: IMidiaContent) => {
     try {
@@ -160,28 +161,32 @@ export const ContentCard = ({
         </Button>
       </div>
       <CardContent className="h-[300px] aspect-[2/3] p-0 pb-2">
-  <img
-    src={image === "N/A" ? default_image_content : image}
-    alt="Card Image"
-    className="w-full h-full object-cover mx-auto"
-  />
-</CardContent>
+        <img
+          src={image === "N/A" ? default_image_content : image}
+          alt="Card Image"
+          className="w-full h-full object-cover mx-auto"
+        />
+      </CardContent>
 
-<CardFooter className="flex flex-col w-48 items-start pb-2 px-2 overflow-hidden">
-  <CardTitle className="text-sm sm:text-base font-medium break-words whitespace-normal">
-    {title}
-  </CardTitle>
-  <CardDescription className="text-gray-600 dark:text-gray-400 flex flex-row gap-2 mt-2">
-    <p>
-      <span className="text-primary">Year: </span>
-      {year}
-    </p>
-    <p>
-      <span className="text-primary">Type: </span>
-      {type}
-    </p>
-  </CardDescription>
-
+      <CardFooter className="flex flex-col w-48 items-start pb-2 px-2 overflow-hidden">
+        <CardTitle
+          className={`cursor-pointer text-sm sm:text-base font-medium break-words whitespace-normal ${
+            isExpanded ? "" : "line-clamp-1"
+          }`}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {title}
+        </CardTitle>
+        <CardDescription className="text-gray-600 dark:text-gray-400 flex flex-row gap-2 mt-2">
+          <p>
+            <span className="text-primary">Year: </span>
+            {year}
+          </p>
+          <p>
+            <span className="text-primary">Type: </span>
+            {type}
+          </p>
+        </CardDescription>
       </CardFooter>
     </Card>
   );
