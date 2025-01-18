@@ -100,7 +100,7 @@ export function Home() {
             }}
             handleIconFunction={() => setSearchValue(inputValue)}
             icon={
-              <Search className="group-hover:text-gray-900 darkgroup-hover:text-gray-50 transition-colors duration-300" />
+              <Search className="group-hover:text-gray-900 dark:group-hover:text-gray-50 transition-colors duration-300" />
             }
           />
         </div>
