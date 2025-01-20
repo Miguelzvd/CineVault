@@ -37,7 +37,7 @@ Follow these steps to set up and run the project locally:
 ### **1. Clone the Repository**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Miguelzvd/CineVault.git
 cd cine-vault.io
 ```
 
